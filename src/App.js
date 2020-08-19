@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+import ColorOption from './ColorOption';
+import './styles/style.css';
+
+import colors from './data';
 
 function App() {
+  const [color, setColor] = useState({
+    color: 'black',
+  });
+
+  const changeColor = selectedColor => {
+    setColor({
+      color: selectedColor,
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className='container'>
+      <h1>Color Picker</h1>
+      <div
+        className='big-square'
+        style={{ backgroundColor: `${color.color}` }}
+      ></div>
+      <div className='options'>
+        {colors.map(color => (
+          <ColorOption key={color} color={color} changeColor={changeColor} />
+        ))}
+      </div>
+    </main>
   );
 }
 
